@@ -1,0 +1,1 @@
+timer_conserto_background = 0;

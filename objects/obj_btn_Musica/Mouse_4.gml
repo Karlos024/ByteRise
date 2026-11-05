@@ -1,0 +1,8 @@
+//SE TIVER DENTRO DA CONFIRMAÇÃO NÃO MOSTRAR O BOTÃO DE MÚSICA
+if (instance_exists(obj_ctld_Fim_confirmacao) && obj_ctld_Fim_confirmacao.exibir_confirmacao == true) {
+    mouse_clear(mb_left);
+    exit; 
+}
+
+image_xscale = 0.9;
+image_yscale = 0.9;

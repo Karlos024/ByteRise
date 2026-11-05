@@ -1,0 +1,43 @@
+{
+  "$GMObject":"",
+  "%Name":"obj_btn_Fim_estatistica",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":4,"eventType":6,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":7,"eventType":6,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
+  "managed":true,
+  "name":"obj_btn_Fim_estatistica",
+  "overriddenProperties":[],
+  "parent":{
+    "name":"Botões",
+    "path":"folders/Objeto/Início e Fim/Fim/Botões.yy",
+  },
+  "parentObjectId":null,
+  "persistent":false,
+  "physicsAngularDamping":0.1,
+  "physicsDensity":0.5,
+  "physicsFriction":0.2,
+  "physicsGroup":1,
+  "physicsKinematic":false,
+  "physicsLinearDamping":0.1,
+  "physicsObject":false,
+  "physicsRestitution":0.1,
+  "physicsSensor":false,
+  "physicsShape":1,
+  "physicsShapePoints":[],
+  "physicsStartAwake":true,
+  "properties":[
+    {"$GMObjectProperty":"v2","%Name":"snd_Screen_change","filters":[
+        "GMSound",
+      ],"listItems":[],"multiselect":false,"name":"snd_Screen_change","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"snd_Botao","path":"sounds/snd_Botao/snd_Botao.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"snd_Botao","varType":5,},
+  ],
+  "resourceType":"GMObject",
+  "resourceVersion":"2.0",
+  "solid":false,
+  "spriteId":{
+    "name":"spr_btn_Estatisticas",
+    "path":"sprites/spr_btn_Estatisticas/spr_btn_Estatisticas.yy",
+  },
+  "spriteMaskId":null,
+  "visible":true,
+}
