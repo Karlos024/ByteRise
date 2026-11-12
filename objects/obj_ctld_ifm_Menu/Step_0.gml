@@ -30,10 +30,12 @@ if (mouse_check_button_pressed(mb_left)) {
             var txt_Final = "";
 			
             if (xp == false) {
+				
                 //MOEDAS
                 var txt_Explicacao = ["Ganhe  moedas  atendendo  clientes  e  use  elas  para  comprar  upgrades!", "Earn  coins  by  serving  customers  and  use  them  to  buy  upgrades!", "Ganando  por  atender  bien,  úsalas  para  comprar  mejoras."];
                 txt_Final = txt_Explicacao[global.idm];
             } else {
+				
                 //EXPERIÊNCIA
                 var txt_XP = ["Ganhe  experiência  ao  concluir  serviços  para  subir  de  nível  e  evoluir!", "Earn  experience  by  completing  services  to  level  up  and  evolve!", "¡Gana  experiencia  al  completar  servicios  para  subir  de  nivel!"];
                 txt_Final = txt_XP[global.idm];

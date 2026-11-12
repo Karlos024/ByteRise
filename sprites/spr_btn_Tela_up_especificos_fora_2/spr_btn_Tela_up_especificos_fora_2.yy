@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"67a1270d-1923-4fb1-9cb0-a072fe14b8f2","name":"67a1270d-1923-4fb1-9cb0-a072fe14b8f2","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"60f6c9bd-cec4-47b0-b30d-60ae692ea84b","name":"60f6c9bd-cec4-47b0-b30d-60ae692ea84b","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":64,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"da872cc4-56a1-4b31-8aa7-f8e25318b8af","blendMode":0,"displayName":"default","isLocked":false,"name":"da872cc4-56a1-4b31-8aa7-f8e25318b8af","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"51a0d7df-08fd-46d1-93f2-4f81b8a376f5","blendMode":0,"displayName":"default","isLocked":false,"name":"51a0d7df-08fd-46d1-93f2-4f81b8a376f5","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_btn_Tela_up_especificos_fora_2",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"67a1270d-1923-4fb1-9cb0-a072fe14b8f2","path":"sprites/spr_btn_Tela_up_especificos_fora_2/spr_btn_Tela_up_especificos_fora_2.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"b0dfde45-ff4a-4b2d-8cef-44784e168de5","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"60f6c9bd-cec4-47b0-b30d-60ae692ea84b","path":"sprites/spr_btn_Tela_up_especificos_fora_2/spr_btn_Tela_up_especificos_fora_2.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"1e687f54-992c-4e47-b2a4-b21c1ff47731","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

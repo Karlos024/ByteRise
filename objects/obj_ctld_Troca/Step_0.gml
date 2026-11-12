@@ -35,7 +35,7 @@ if (exibir_troca_fase == true) {
                     audio_play_sound(snd_Compra, 1, false);
                     
                     //REINICIA AS MOEDAS PARA ZERO APÓS A COMPRA
-					//global.moedas = 0;
+					global.moedas = 0;
                     global.comprada_2 = true;
                     exibir_troca_fase = false;
                     global.fase_atual = 2;
@@ -49,7 +49,7 @@ if (exibir_troca_fase == true) {
                     audio_play_sound(snd_Compra, 1, false);
                     
                     //REINICIA AS MOEDAS PARA ZERO APÓS A COMPRA
-					//global.moedas = 0;
+					global.moedas = 0;
                     global.comprada_3 = true;
                     exibir_troca_fase = false;
                     global.fase_atual = 3;

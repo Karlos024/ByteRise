@@ -1,3 +1,4 @@
+if (!tutorial_permite(object_index)) exit;
 image_xscale = 1.9;
 image_yscale = 0.9;
 
@@ -22,6 +23,7 @@ if (instance_exists(obj_ctld_Configuracoes)) {
         } else {
             other.image_index = 0;
 			
+			//REMOVE OS BOTÕES
 			if (instance_exists(btn_Idiomas))         { instance_destroy(btn_Idiomas); }
             if (instance_exists(btn_Musica))          { instance_destroy(btn_Musica); }
             if (instance_exists(btn_Efeitos_sonoros)) { instance_destroy(btn_Efeitos_sonoros); }

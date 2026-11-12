@@ -2,24 +2,31 @@
   "$GMSprite":"v2",
   "%Name":"spr_Tutorial_personagem_3",
   "bboxMode":0,
-  "bbox_bottom":68,
-  "bbox_left":8,
-  "bbox_right":497,
-  "bbox_top":1,
+  "bbox_bottom":84,
+  "bbox_left":16,
+  "bbox_right":49,
+  "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"22cdc39c-affb-4fd3-959d-93c28ddb5c8f","name":"22cdc39c-affb-4fd3-959d-93c28ddb5c8f","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"50e96816-b069-4ae5-9421-f0c5c923d95d","name":"50e96816-b069-4ae5-9421-f0c5c923d95d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"1b0aa89d-8bb4-4c1e-b62e-dd285db4aebf","name":"1b0aa89d-8bb4-4c1e-b62e-dd285db4aebf","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"4e648046-ef47-4f3e-bfe8-adf4fdd6c4c1","name":"4e648046-ef47-4f3e-bfe8-adf4fdd6c4c1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"9bfaf095-d71a-455d-8e16-cb520eafda65","name":"9bfaf095-d71a-455d-8e16-cb520eafda65","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"be0bd054-2138-4aed-a177-532299f4b25d","name":"be0bd054-2138-4aed-a177-532299f4b25d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"2f5181b3-dbef-4f04-bf36-fa77970a0f65","name":"2f5181b3-dbef-4f04-bf36-fa77970a0f65","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"3a1e3533-6ed8-46ff-af76-de8173da37b1","name":"3a1e3533-6ed8-46ff-af76-de8173da37b1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"980856f6-ccae-4188-9d78-2f4dfd857b8b","name":"980856f6-ccae-4188-9d78-2f4dfd857b8b","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
-  "height":69,
+  "height":86,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"3b6dfc67-9cd6-4e2e-ba33-8e77eea6f2dc","blendMode":0,"displayName":"default","isLocked":false,"name":"3b6dfc67-9cd6-4e2e-ba33-8e77eea6f2dc","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"0e6a4bdc-bbaf-4c3a-a66b-da5a12df4d51","blendMode":0,"displayName":"default","isLocked":false,"name":"0e6a4bdc-bbaf-4c3a-a66b-da5a12df4d51","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_Tutorial_personagem_3",
   "nineSlice":{
@@ -29,7 +36,7 @@
     "guideColour":[4294902015,4294902015,4294902015,4294902015,],
     "highlightColour":1728023040,
     "highlightStyle":0,
-    "left":1,
+    "left":0,
     "resourceType":"GMNineSliceData",
     "resourceVersion":"2.0",
     "right":0,
@@ -68,7 +75,7 @@
     },
     "eventStubScript":null,
     "eventToFunction":{},
-    "length":1.0,
+    "length":8.0,
     "lockOrigin":false,
     "moments":{
       "$KeyframeStore<MomentsEventKeyframe>":"",
@@ -88,14 +95,35 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"22cdc39c-affb-4fd3-959d-93c28ddb5c8f","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"b04a9e17-ed65-463e-abd3-4c5a8b751d50","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"50e96816-b069-4ae5-9421-f0c5c923d95d","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"0a905ccc-9700-4735-86bc-f6bc4d2b9f92","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"1b0aa89d-8bb4-4c1e-b62e-dd285db4aebf","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"a3e5dd3d-8129-4a65-86f5-469d38827ac5","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"4e648046-ef47-4f3e-bfe8-adf4fdd6c4c1","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"2837dcaf-3b42-4d12-8a5e-e0c83de7e954","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"9bfaf095-d71a-455d-8e16-cb520eafda65","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"7a3f8006-5755-47d3-947a-6e1625a26cb5","IsCreationKey":false,"Key":3.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"be0bd054-2138-4aed-a177-532299f4b25d","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"2612e419-a86d-413b-86c9-5a7d3ee5d006","IsCreationKey":false,"Key":4.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"2f5181b3-dbef-4f04-bf36-fa77970a0f65","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"e905bc87-84e6-4b92-a659-9b6b4028ecfd","IsCreationKey":false,"Key":5.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"3a1e3533-6ed8-46ff-af76-de8173da37b1","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"2f8410e8-f047-41fc-aa6b-1f10c54f25d0","IsCreationKey":false,"Key":6.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"980856f6-ccae-4188-9d78-2f4dfd857b8b","path":"sprites/spr_Tutorial_personagem_3/spr_Tutorial_personagem_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"4616a3e1-2bca-4753-acb9-8139d2b9198d","IsCreationKey":false,"Key":7.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
     "volume":1.0,
-    "xorigin":506,
-    "yorigin":34,
+    "xorigin":64,
+    "yorigin":43,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
@@ -105,5 +133,5 @@
   },
   "type":0,
   "VTile":false,
-  "width":506,
+  "width":64,
 }

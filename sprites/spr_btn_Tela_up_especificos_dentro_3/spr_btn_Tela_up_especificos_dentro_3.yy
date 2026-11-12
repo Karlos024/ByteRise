@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"27593b26-5435-4f7b-8423-e0b2453b9b4d","name":"27593b26-5435-4f7b-8423-e0b2453b9b4d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"fd67acda-e95c-44d2-9ccd-dd6536082725","name":"fd67acda-e95c-44d2-9ccd-dd6536082725","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":64,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"2ecc1800-dd4f-4b93-b3c1-01fba9074c5a","blendMode":0,"displayName":"default","isLocked":false,"name":"2ecc1800-dd4f-4b93-b3c1-01fba9074c5a","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"5c6d28c9-1bd9-4258-8ec0-0ccfd9bd1d87","blendMode":0,"displayName":"default","isLocked":false,"name":"5c6d28c9-1bd9-4258-8ec0-0ccfd9bd1d87","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_btn_Tela_up_especificos_dentro_3",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"27593b26-5435-4f7b-8423-e0b2453b9b4d","path":"sprites/spr_btn_Tela_up_especificos_dentro_3/spr_btn_Tela_up_especificos_dentro_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"bac6bbc0-545a-42b8-ad8f-b70bc6fa3338","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"fd67acda-e95c-44d2-9ccd-dd6536082725","path":"sprites/spr_btn_Tela_up_especificos_dentro_3/spr_btn_Tela_up_especificos_dentro_3.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"f0b35fa4-ed5a-49a4-b5a7-63e0383cc402","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

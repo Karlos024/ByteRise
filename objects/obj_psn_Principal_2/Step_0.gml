@@ -1,5 +1,6 @@
+if (tutorial_f2_ativo() && obj_Tutorial_interativo_2.etapa != 6) { arrastando = false; exit; }
 //APAGA QUANDO COMPRA O NÍVEL 3 DOS FUNCIONÁRIOS
-if (variable_global_exists("funcionario_2") && global.funcionario_2 >= 3) {
+if (variable_global_exists("funcionario_2") && global.funcionario_2 >= 3 && !tutorial_f2_ativo()) {
     arrastando = false;
     voltando = false;
     mesa_atual = noone;
@@ -60,7 +61,7 @@ if (variable_instance_exists(id, "voltando") && voltando == true) {
     //VELOCIDADE DO MOVIMENTO POR FRAME
     var distancia_posto = point_distance(x, y, alvo_volta_x, alvo_volta_y);
     var margem_chegada = 4;
-    if (fase_volta_psn == 3) { margem_chegada = 2;}
+    if (fase_volta_psn == 3) { margem_chegada = 2; }
     
     //VOLTA O PROTAGONISTA ATÉ O PONTO ORIGINAL OU ZERA SUAS VARIÁVEIS CASO ELE JÁ TENHA CHEGADO
     if (distancia_posto > margem_chegada) {
@@ -94,20 +95,17 @@ if (!instance_exists(obj_Pedido_2) && !voltando) {
         arrastando = true;
         mesa_atual = noone;
         fase_volta_psn = 0;
+        image_index = 0;
     }
 }
 
 if (arrastando) {
 	
-    //ANIMAÇÃO PUXADO
-    image_speed = 0;
-    image_index = 1;
-    
     //DECLARAÇÃO
     var mouse_limitado_x = mouse_x;
     var mouse_limitado_y = mouse_y;
     
-    //LIMITA O MOUSE NAS BORDAS DO CENÁRIO E DO BALCÃO E ATUALIZA A POSIÇÃO
+    //LIMITA O MOUSE
     if (instance_exists(obj_Cenario_2)) {
         var margem = 40;
         mouse_limitado_x = clamp(mouse_x, obj_Cenario_2.bbox_left + margem, obj_Cenario_2.bbox_right - margem);
@@ -128,7 +126,7 @@ if (arrastando) {
     if (mouse_check_button_released(mb_left)) {
         arrastando = false;
         
-        //OLHA QUAL MESA O PERSONAGEM COLIDIU AO SER SOLTO
+        //QUAL MESA COLIDIU AO SER SOLTO
         var mesa_colidida = instance_place(x, y, obj_Mesa_HD_SSD);
         var tipo_mesa = 0;
         
@@ -144,7 +142,7 @@ if (arrastando) {
         //VERIFICA SE A MESA FOI COMPRADA E SE JÁ NÃO TEM UM FUNCIONÁRIO TRABALHANDO NELA
         if (mesa_colidida != noone) {
             var func = instance_find(obj_psn_Consertador_2, 0);
-            var func_na_mesa = (func != noone && func.mesa_alvo == mesa_colidida && func.estado_func > 0);
+            var func_na_mesa = (!tutorial_f2_ativo() && func != noone && func.mesa_alvo == mesa_colidida && func.estado_func > 0);
             var upgrade_comprado = false;
             
             if (tipo_mesa == 0 && variable_global_exists("hd_ssd") && global.hd_ssd > 0) { upgrade_comprado = true; }
@@ -152,14 +150,16 @@ if (arrastando) {
             if (tipo_mesa == 2 && variable_global_exists("gpu") && global.gpu > 0) { upgrade_comprado = true; }
             
             //ENCAIXA O PERSONAGEM NA MESA SE AS CONDIÇÕES FOREM VÁLIDAS
+            if (tutorial_f2_ativo()) {
+                var _guia_f2 = obj_Tutorial_interativo_2;
+                if (!instance_exists(_guia_f2.cliente) || _guia_f2.cliente.pedido_area != tipo_mesa) upgrade_comprado = false;
+                else if (upgrade_comprado) _guia_f2.arrastou = true;
+            }
             if (upgrade_comprado && !func_na_mesa) {
                 x = mesa_colidida.x;
                 y = mesa_colidida.y + 10;
                 mesa_atual = mesa_colidida;
-                
-                //ANIMAÇÃO TRABALHANDO
-                image_speed = 0;
-                image_index = 27;
+                image_index = 46;
             } else {
                 voltando = true;
                 fase_volta_psn = 0;
@@ -174,23 +174,21 @@ if (arrastando) {
 }
 
 //ANIMAÇÃO
-var andando = (x != x_anterior || y != y_anterior);
+image_speed = 0;
 if (arrastando) {
-    image_speed = 0;
-    image_index += 0.35;
-    if (image_index < 0 || image_index > 7) {
-        image_index = 0;
+    image_index += 0.20;
+    if (image_index < 24 || image_index > 39) {
+        image_index = 24;
     }
-} 
-else if (andando) {
+} else if (x != x_anterior || y != y_anterior) {
     var _dx = x - x_anterior;
     var _dy = y - y_anterior;
-    var _frame_min = 18;
-    var _frame_max = 25;
+    var _frame_min = 40;
+    var _frame_max = 47;
     
     if (abs(_dx) > abs(_dy)) {
-        _frame_min = 26;
-        _frame_max = 33;
+        _frame_min = 48;
+        _frame_max = 55;
         if (_dx > 0) {
             image_xscale = -abs(image_xscale);
         } else {
@@ -199,32 +197,27 @@ else if (andando) {
     } else {
         image_xscale = abs(image_xscale);
         if (_dy > 0) {
-            _frame_min = 18;
-            _frame_max = 25;
+            _frame_min = 40;
+            _frame_max = 47;
         } else {
-            _frame_min = 34;
-            _frame_max = 41;
+            _frame_min = 56;
+            _frame_max = 63;
         }
     }
-    image_speed = 0;
-    image_index += 0.35;
+    image_index += 0.25;
     if (image_index < _frame_min || image_index > _frame_max) {
         image_index = _frame_min;
     }
-} 
-else if (mesa_atual != noone && !voltando) {
-    image_speed = 0;
-    image_index += 0.35;
-    if (image_index < 42 || image_index > 49) {
-        image_index = 42;
+} else if (mesa_atual != noone && !voltando) {
+    image_index += 0.20;
+    if (image_index < 64 || image_index > 71) {
+        image_index = 64;
     }
-} 
-else {
+} else {
     image_xscale = abs(image_xscale);
-    image_speed = 0;
-    image_index += 0.35;
-    if (image_index < 8 || image_index > 17) {
-        image_index = 8;
+    image_index += 0.1;
+    if (image_index < 0 || image_index > 23) {
+        image_index = 0;
     }
 }
 x_anterior = x;

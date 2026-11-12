@@ -1,3 +1,4 @@
+if (!tutorial_permite(object_index)) exit;
 //SE TIVER DENTRO DAS ESTATÍSTICAS NÃO MOSTRAR ESTATÍSTICAS
 if (instance_exists(obj_ctld_Fim_estatisticas) && obj_ctld_Fim_estatisticas.exibir_estatisticas == true) {
     mouse_clear(mb_left);

@@ -1,3 +1,4 @@
+if (!tutorial_permite(object_index)) exit;
 //SE TIVER DENTRO DO SOBRE MOSTRAR NÃO MOSTRAR O BOTÃO IDIOMA
 if (instance_exists(obj_ctld_Inicio_sobre) && obj_ctld_Inicio_sobre.exibir_sobre == true) {
     mouse_clear(mb_left);

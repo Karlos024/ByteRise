@@ -9,5 +9,5 @@ draw_set_color(c_white);
 
 //EXIBIR O TEXTO
 if (variable_instance_exists(id, "Texto_exibido")) {
-    draw_text_ext(x - 40, y + 40, Texto_exibido, 14, 210);
+    draw_text_ext(x - 30, y + 40, Texto_exibido, 14, 200);
 }

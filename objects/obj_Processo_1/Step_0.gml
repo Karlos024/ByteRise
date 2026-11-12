@@ -32,10 +32,10 @@ if (room_get_name(room) != "rm_Tela_principal_1") {
         //CONFIGURA O TEMPO TOTAL DO PROCESSO EM SEGUNDOS POR NÍVEL
         var Processo = 8.0;
         switch (Nivel_funcionario) {
-            case 0:  Processo = 8.0; break;
-            case 1:  Processo = 7.0; break;
-            case 2:  Processo = 6.0; break;
-            default: Processo = 5.0; break;
+            case 0:  Processo = 6.0; break;
+            case 1:  Processo = 5.0; break;
+            case 2:  Processo = 4.0; break;
+            default: Processo = 3.0; break;
         }
         timer_fliperama_background += (1 / _fps) / Processo;
         if (timer_fliperama_background >= 1) {

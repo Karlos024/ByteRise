@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_btn_Tela_up_especificos_fora_1",
-    "path":"sprites/spr_btn_Tela_up_especificos_fora_1/spr_btn_Tela_up_especificos_fora_1.yy",
+    "name":"spr_btn_Tela_up_especificos_fora_2",
+    "path":"sprites/spr_btn_Tela_up_especificos_fora_2/spr_btn_Tela_up_especificos_fora_2.yy",
   },
   "spriteMaskId":null,
   "visible":true,

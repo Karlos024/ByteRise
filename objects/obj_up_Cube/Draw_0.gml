@@ -69,10 +69,12 @@ var txt_Proximo = [
 draw_set_font(font_Principal);
 
 if (Nivel >= 15) {
+	
     //MÁXIMO
     draw_set_color(c_lime);
     draw_text(x, y + 40, txt_Maximo[Idioma]); 
 } else {
+	
     //COR DA MELHORIA ATUAL
     var cor_Atual = c_lime;
     if (Nivel == 0) {

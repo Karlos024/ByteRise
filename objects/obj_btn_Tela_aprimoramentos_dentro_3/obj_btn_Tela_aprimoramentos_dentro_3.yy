@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_btn_Tela_aprimoramentos_dentro_3",
-    "path":"sprites/spr_btn_Tela_aprimoramentos_dentro_3/spr_btn_Tela_aprimoramentos_dentro_3.yy",
+    "name":"spr_btn_Tela_aprimoramentos_dentro",
+    "path":"sprites/spr_btn_Tela_aprimoramentos_dentro/spr_btn_Tela_aprimoramentos_dentro.yy",
   },
   "spriteMaskId":null,
   "visible":true,

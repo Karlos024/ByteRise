@@ -44,7 +44,7 @@ if (fase == 1) {
         draw_sprite_ext(spr_Tutorial_fliperama, 0, 50, 300, 1.3, 1.3, 0, c_white, 1);		
 		txt_Texto = ["Existem  diversos  tipos  de  clientes  frequentando  a  sua  Lan  House.  Cada  um  deles  tem  seu  próprio  gosto  para  jogar  e  pode  pagar  valores  diferentes.",  "There  are  several  types  of  customers  visiting  your  Lan  House.  Each  one  has  their  own  taste  in  gaming  and  can  pay  different  amounts.",  "Existen  diversos  tipos  de  clientes  que  visitan  tu  Lan  House.  Cada  uno  tiene  su  propio  gusto  para  jogar  y  puede  pagar  valores  diferentes."];
         draw_text_ext(15, 420, txt_Texto[global.idm], 22, 250);
-        draw_sprite_ext(spr_Tutorial_personagem_1, image_index, 305, 460, 1.8, 1.8, 0, c_white, 1);
+        draw_sprite_ext(spr_Tutorial_personagem_1, image_index, 305, 460, 1.6, 1.6, 0, c_white, 1);
     } 
 	
     //PÁGINA 2
@@ -116,7 +116,7 @@ else if (fase == 2) {
         draw_sprite_ext(spr_Tutorial_mesa, 0, 50, 315, 1.3, 1.3, 0, c_white, 1);		
 		txt_Texto = ["Existem  diversos  tipos  de  clientes  frequentando  a  sua  Assistência  Técnica.  Cada  um  deles  tem  sua  forma  de  explicar  o  problema  e  pode  pagar  valores  diferentes.", "There  are  several  types  of  customers  visiting  your  Technical  Support.  Each  one  has  their  own  way  of  explaining  the  problem  and  can  pay  different  amounts.", "Existen  diversos  tipos  de  clientes  que  visitan  tu  Asistencia  Técnica.  Cada  uno  tiene  su  propia  forma  de  explicar  el  problema  y  puede  pagar  valores  diferentes."];
         draw_text_ext(15, 420, txt_Texto[global.idm], 22, 250);
-        draw_sprite_ext(spr_Tutorial_personagem_2, image_index, 370, 475, 1.8, 1.8, 0, c_white, 1);
+        draw_sprite_ext(spr_Tutorial_personagem_2, image_index, 365, 475, 1.6, 1.6, 0, c_white, 1);
 
     }
 	
@@ -183,7 +183,7 @@ else if (fase == 3) {
         draw_set_font(font_Texto);
         txt_Texto = ["O  Montador  vai  fabricar  o  dispositivo  móvel.  Depois,  o  Exportador  recolhe  os  itens  \n  e  leva  até  a  esteira  para  empacotamento!", "The  Assembler  will  manufacture  the  mobile  device.  Then,  the  Exporter  collects  the  items  \n  and  takes  them  to  the  conveyor  belt  for  packaging!", "¡El  Montador  fabricará  el  dispositivo  móvel.  Después,  el  Exportador  recoge  los  ítems  \n  y  los  lleva  a  la  cinta  transportadora  para  su  empaque!"];
         draw_text_ext(15, 85, txt_Texto[global.idm], 22, 250);
-        draw_sprite_ext(spr_Tutorial_personagem_3, 0, 300, 125, 0.2, 0.2, 0, c_white, 1);
+		draw_sprite_ext(spr_Tutorial_personagem_3, image_index, 345, 125, 1.6, 1.5, 0, c_white, 1);
 		txt_Texto = ["Cada  dispositivo  pertence  a  uma  classe:  ruim,  bom  ou  perfeito.  \n  Os  melhores  aparelhos  geram  muito  mais  lucro.", "Each  device  belongs  to  a  class:  bad,  good,  or  perfect.  \n  The  best  devices  generate  much  more  profit.", "Cada  dispositivo  pertenece  a  una  clase:  malo,  bueno  o  perfecto.  \n  Los  mejores  aparatos  generan  muchas  más  ganancias."];
         draw_text_ext(100, 255, txt_Texto[global.idm], 22, 250);
         draw_sprite_ext(spr_Tutorial_bancada, 0, 50, 300, 1.3, 1.3, 0, c_white, 1);		

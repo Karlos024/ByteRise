@@ -1,6 +1,6 @@
 //CONFIGURAÇÃO DOS ESTADOS, ROTAS E FRAMES
 fase = 1;
-estado_fila = 0; // 0 = FILA, 1 = BALCÃO, 2 = PROCURANDO, 3 = INDO FLIPERAMA, 4 = JOGANDO, 5 = SAINDO
+estado_fila = 0;
 velocidade_npc = 1.5; 
 espaco_fila = 55;
 timer_atendimento = 0;
@@ -32,6 +32,19 @@ spawner_y = ystart;
 //SORTEIO DE COMPORTAMENTO
 multiplicador_pagamento = 1.0;
 tipo_cliente = 0;
+
+//EVENTO DE MISSÃO - CASA LOTADA E FREGUESIA VIP
+if (!variable_global_exists("ms_vip_tempo")) {
+    global.ms_vip_tempo = 0;
+}
+
+if (!variable_global_exists("ms_vip_atendimentos")) {
+    global.ms_vip_atendimentos = 0;
+}
+
+if (!variable_global_exists("ms_casa_atendimentos")) {
+    global.ms_casa_atendimentos = 0;
+}
 
 //SORTEIO DE CLIENTES INCOMUNS
 var sorteio_tipo = random(100);
@@ -65,15 +78,40 @@ if (variable_global_exists("fliperama_3") && global.fliperama_3 > 0) {
 if (ds_list_size(fliperamas_disponiveis) > 0) {
     var indice_sorteado = irandom(ds_list_size(fliperamas_disponiveis) - 1);
     var fliperama_escolhido = ds_list_find_value(fliperamas_disponiveis, indice_sorteado);
+
+    //SORTEIO ENTRE OS 54 PERSONAGENS
+    var numero_personagem = irandom_range(1, 18);
+    var nome_sprite = "";
+
     if (fliperama_escolhido == 0) {
         tipo = 0;
-        if (tipo_cliente == 0) { sprite_index = spr_psn_Cube_World; }
+
+        if (tipo_cliente == 0) {
+            nome_sprite = "spr_psn_Cube_World_" + string(numero_personagem);
+        }
+
     } else if (fliperama_escolhido == 1) {
         tipo = 3;
-        if (tipo_cliente == 0) { sprite_index = spr_psn_Alfredos; }
+
+        if (tipo_cliente == 0) {
+            nome_sprite = "spr_psn_Alfredos_" + string(numero_personagem);
+        }
+
     } else if (fliperama_escolhido == 2) {
         tipo = 4;
-        if (tipo_cliente == 0) { sprite_index = spr_psn_Pocket_Mosters; }
+
+        if (tipo_cliente == 0) {
+            nome_sprite = "spr_psn_Pocket_Mosters_" + string(numero_personagem);
+        }
+    }
+
+    //APLICA A SPRITE SORTEADA
+    if (tipo_cliente == 0) {
+        var sprite_sorteada = asset_get_index(nome_sprite);
+
+        if (sprite_sorteada != -1) {
+            sprite_index = sprite_sorteada;
+        }
     }
 } else {
     ds_list_destroy(fliperamas_disponiveis);
@@ -91,7 +129,7 @@ desenhar_mostrador = function(coordenada_x, coordenada_y, progresso, raio) {
     draw_circle(coordenada_x, coordenada_y, raio * 20 / 14, false); 
     draw_set_color(make_color_rgb(60, 60, 60));
     draw_circle(coordenada_x, coordenada_y, raio, false); 
-    
+
     var progresso_limpo = clamp(floor(progresso * 100), 0, 100); 
     if (progresso_limpo > 0) {
         if (progresso_limpo < 100) {

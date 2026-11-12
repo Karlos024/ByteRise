@@ -2,9 +2,9 @@
   "$GMSprite":"v2",
   "%Name":"spr_up_Alfredos",
   "bboxMode":0,
-  "bbox_bottom":0,
+  "bbox_bottom":63,
   "bbox_left":0,
-  "bbox_right":0,
+  "bbox_right":63,
   "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -12,14 +12,14 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"0e63f4db-ce3d-4fd5-aed1-1b969b48d3ca","name":"0e63f4db-ce3d-4fd5-aed1-1b969b48d3ca","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"4d6c5ba5-5074-4f7e-811a-11f8ccc8320d","name":"4d6c5ba5-5074-4f7e-811a-11f8ccc8320d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":64,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"b3be8957-2dff-40ce-8a17-059226c9c2eb","blendMode":0,"displayName":"default","isLocked":false,"name":"b3be8957-2dff-40ce-8a17-059226c9c2eb","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"dcafdf00-1ad7-4c1c-bde9-6c58924eb3c5","blendMode":0,"displayName":"default","isLocked":false,"name":"dcafdf00-1ad7-4c1c-bde9-6c58924eb3c5","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_up_Alfredos",
   "nineSlice":null,
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0e63f4db-ce3d-4fd5-aed1-1b969b48d3ca","path":"sprites/spr_up_Alfredos/spr_up_Alfredos.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"31898303-e80f-49bc-8a1d-da23f5979ceb","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"4d6c5ba5-5074-4f7e-811a-11f8ccc8320d","path":"sprites/spr_up_Alfredos/spr_up_Alfredos.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"95cda498-5794-40a3-acdc-3ed73909f038","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

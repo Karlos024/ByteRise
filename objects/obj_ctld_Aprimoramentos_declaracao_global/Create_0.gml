@@ -21,4 +21,5 @@ global.celular       = 0;
 global.tablet        = 0;
 global.notebook      = 0;
 
+//EXTRAS
 global.exibir_config = false;

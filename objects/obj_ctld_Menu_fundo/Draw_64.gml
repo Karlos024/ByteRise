@@ -2,6 +2,7 @@ draw_sprite_ext(spr_Informacoes_fundo, 0, x + 100, y + 17, 2.2, 1, 0, c_white, 1
 
 //PADRÃO DOS CARACTERES
 draw_set_font(font_Pequena);
+draw_set_valign(fa_top);  
 draw_set_halign(fa_left);
 draw_set_color(c_white);
 

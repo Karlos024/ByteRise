@@ -62,7 +62,7 @@ if (room == rm_Tela_principal_1) {
 					} else {
 						sentido_fliperama = -1;
 					}
-					var fliperama_x = x + (sentido_fliperama * 24);
+					var fliperama_x = x + (sentido_fliperama * 15);
 					var fliperama_y = y + 14;
 					var porcentagem_fliperama = clamp(floor(progresso_dentro * 100), 0, 100);
 					if (porcentagem_fliperama > 0) {

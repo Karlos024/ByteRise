@@ -96,20 +96,56 @@ if (variable_instance_exists(id, "atendimento_concluido_posto") && atendimento_c
             break;
     }
 
-	//ADICIONA NA CONTA E COM O MULTIPLICADOR
-    var recompensa_final = floor(valor_moedas * multiplicador_pagamento);
+    //ADICIONA NA CONTA E COM O MULTIPLICADOR
+    var multiplicador_moedas_evento = 1;
+    var multiplicador_xp_evento = 1;
+
+    if (variable_global_exists("ms_taxacao_tempo") && global.ms_taxacao_tempo > 0) multiplicador_moedas_evento = 3;
+    if (variable_global_exists("ms_chuva_tempo") && global.ms_chuva_tempo > 0) multiplicador_xp_evento = 3;
+
+    var recompensa_final = floor(valor_moedas * multiplicador_pagamento * multiplicador_moedas_evento);
+    var xp_final = floor(valor_xp * multiplicador_xp_evento);
+
     global.moedas += recompensa_final;
     global.moedas_acumuladas += recompensa_final;
-    global.experiencia_atual += valor_xp;
+    global.experiencia_atual += xp_final;
+
+    if (!variable_global_exists("xp_acumulado")) global.xp_acumulado = 0;
+    if (!variable_global_exists("ms_progressos")) global.ms_progressos = array_create(12, 0);
+
+    global.xp_acumulado += xp_final;
+    global.ms_progressos[0] = global.xp_acumulado;
+    global.ms_progressos[2] = global.moedas_acumuladas;
+
+    //EVENTO DE MISSÃO - OFICINA TURBO
+    if (!variable_global_exists("ms_turbo_reparos")) global.ms_turbo_reparos = 0;
+    global.ms_turbo_reparos += 1;
+    global.ms_progressos[7] = global.ms_turbo_reparos;
+
+    //EVENTO DE MISSÃO - VIDENTE (CADA CLIENTE ATENDIDO)
+    if (!variable_global_exists("ms_vidente_atendimentos")) {
+        global.ms_vidente_atendimentos = 0;
+    }
+    global.ms_vidente_atendimentos += 1;
+    global.ms_progressos[8] = global.ms_vidente_atendimentos;
+	
+	//EVENTO DE MISSÃO - INVASÃO ESBANJADORA
+	if (sprite_index == spr_psn_Esbanjador_2) {
+		if (!variable_global_exists("ms_esbanjadora_atendimentos")) {
+			global.ms_esbanjadora_atendimentos = 0;
+			}
+		global.ms_esbanjadora_atendimentos += 1;
+		global.ms_progressos[6] = global.ms_esbanjadora_atendimentos;
+	}
 
     //SOM DE PAGAMENTO
     if (variable_global_exists("sc_ligado") && global.sc_ligado && asset_get_index("snd_Moeda") != -1) {
         audio_play_sound(snd_Moeda, 1, false);
     }
 
-	//MANDA O CLIENTE PRO CAMINHO DE SAÍDA
+    //MANDA O CLIENTE PRO CAMINHO DE SAÍDA
     atendimento_concluido_posto = false;
-    estado_fila = 2; 
+    estado_fila = 2;
     fase_saida = 0;
 }
 
@@ -136,30 +172,30 @@ if (!inicializado) {
 }
 
 //CLIQUE
-var _fps = max(1, game_get_speed(gamespeed_fps)); 
-if (!variable_global_exists("tempo")) { 
-    global.tempo = 1.0; 
-} 
+var _fps = max(1, game_get_speed(gamespeed_fps));
+if (!variable_global_exists("tempo")) {
+    global.tempo = 1.0;
+}
 
-var clique = 0; 
-if (mouse_check_button_pressed(mb_left)) { 
-    if (mouse_y >= 64 && mouse_y <= 576) { 
+var clique = 0;
+if (mouse_check_button_pressed(mb_left)) {
+    if (mouse_y >= 64 && mouse_y <= 576) {
         var ignorar = false;
-        if (instance_exists(obj_ctld_Configuracoes)) { 
-            if (obj_ctld_Configuracoes.exibir_config) { ignorar = true; } 
-        } 
-        if (instance_exists(obj_ctld_Troca)) { 
-            if (obj_ctld_Troca.exibir_troca_fase) { ignorar = true; } 
-        }      
-        if (!ignorar) { 
-            clique = global.tempo; 
-        } 
-    } 
+        if (instance_exists(obj_ctld_Configuracoes)) {
+            if (obj_ctld_Configuracoes.exibir_config) { ignorar = true; }
+        }
+        if (instance_exists(obj_ctld_Troca)) {
+            if (obj_ctld_Troca.exibir_troca_fase) { ignorar = true; }
+        }
+        if (!ignorar) {
+            clique = global.tempo;
+        }
+    }
 }
 
 switch (estado_fila) {
-	
-	//GERENCIA A MOVIMENTAÇÃO DO CLIENTE ATÉ A SUA POSIÇÃO NA FILA DO BALCÃO
+
+    //GERENCIA A MOVIMENTAÇÃO DO CLIENTE ATÉ A SUA POSIÇÃO NA FILA DO BALCÃO
     case 0:
         if (!instance_exists(balcao_id)) {
             break;
@@ -191,7 +227,7 @@ switch (estado_fila) {
             alvo_entrada_y = fila_y;
         }
 
-		//CALCULA O DESLOCAMENTO ATÉ A PRÓXIMA VAGA OU ATIVA O ATENDIMENTO SE CHEGOU NO BALCÃO
+        //CALCULA O DESLOCAMENTO ATÉ A PRÓXIMA VAGA OU ATIVA O ATENDIMENTO SE CHEGOU NO BALCÃO
         var dist = point_distance(x, y, alvo_entrada_x, alvo_entrada_y);
         if (dist > 4) {
             var dir = point_direction(x, y, alvo_entrada_x, alvo_entrada_y);
@@ -199,7 +235,7 @@ switch (estado_fila) {
             y += lengthdir_y(min(velocidade, dist), dir);
         } else if (fase_entrada == 2) {
             x = alvo_entrada_x;
-            y = alvo_entrada_y;	
+            y = alvo_entrada_y;
             if (idx == 0 && !balcao_id.ocupado) {
                 balcao_id.ocupado = true;
                 estado_fila = 1;
@@ -209,86 +245,88 @@ switch (estado_fila) {
         break;
 
     //ATENDIMENTO NO CAIXA E TRABALHO NA MESA
-    case 1: 
+    case 1:
         if (!instance_exists(balcao_id)) {
             break;
         }
         x = balcao_id.x - 60;
         y = balcao_id.y - 60;
-		
-		//ATENDEDOR
+
+        //ATENDEDOR
         var atendente_mesa_HD = (instance_exists(obj_Mesa_HD_SSD) && obj_Mesa_HD_SSD.atendente_aqui);
         var atendente_mesa_PSU = (instance_exists(obj_Mesa_PSU) && obj_Mesa_PSU.atendente_aqui);
         var atendente_mesa_GPU = (instance_exists(obj_Mesa_GPU) && obj_Mesa_GPU.atendente_aqui);
-		
-		//JOGADOR
+
+        //JOGADOR
         var protagonista = instance_find(obj_psn_Principal_2, 0);
         var jogador_mesa_HD = (protagonista != noone && protagonista.x == obj_Mesa_HD_SSD.x && protagonista.y == obj_Mesa_HD_SSD.y + 10);
         var jogador_mesa_PSU = (protagonista != noone && protagonista.x == obj_Mesa_PSU.x && protagonista.y == obj_Mesa_PSU.y + 10);
         var jogador_mesa_GPU = (protagonista != noone && protagonista.x == obj_Mesa_GPU.x && protagonista.y == obj_Mesa_GPU.y + 10);
 
-		//SOM DE RECUSADO E MUDANÇA DE COR
-		if ((pedido_area != 0 && jogador_mesa_HD) || (pedido_area != 1 && jogador_mesa_PSU) || (pedido_area != 2 && jogador_mesa_GPU)) {
-			if (variable_global_exists("sc_ligado") && global.sc_ligado && asset_get_index("snd_Recusado") != -1) {
-				audio_play_sound(snd_Recusado, 1, false);
-			}
-			if (instance_exists(obj_psn_Principal_2)) {
-				obj_psn_Principal_2.voltando = true;
-			}
-			image_blend = make_color_rgb(255, 150, 150);
+        //SOM DE RECUSADO E MUDANÇA DE COR
+        if ((pedido_area != 0 && jogador_mesa_HD) || (pedido_area != 1 && jogador_mesa_PSU) || (pedido_area != 2 && jogador_mesa_GPU)) {
+            if (variable_global_exists("sc_ligado") && global.sc_ligado && asset_get_index("snd_Recusado") != -1) {
+                audio_play_sound(snd_Recusado, 1, false);
+            }
+            if (instance_exists(obj_psn_Principal_2)) {
+                obj_psn_Principal_2.voltando = true;
+            }
+            image_blend = make_color_rgb(255, 150, 150);
 
-			//REMOVE O CLIENTE DA FILA E INICIA A SAÍDA
-			var posicao = ds_list_find_index(balcao_id.fila, id);
-			if (posicao != -1) ds_list_delete(balcao_id.fila, posicao);
-			balcao_id.ocupado = false;
-			estado_fila = 2;
-			fase_saida = 0;
-			break;
-		}
-
+            //REMOVE O CLIENTE DA FILA E INICIA A SAÍDA
+            var posicao = ds_list_find_index(balcao_id.fila, id);
+            if (posicao != -1) ds_list_delete(balcao_id.fila, posicao);
+            balcao_id.ocupado = false;
+            estado_fila = 2;
+            fase_saida = 0;
+            break;
+        }
 
         //VERIFICA SE O JOGADOR ESTÁ NA MESA CORRETA
         var jogador_correto = false;
         if (pedido_area == 0 && jogador_mesa_HD) jogador_correto = true;
         if (pedido_area == 1 && jogador_mesa_PSU) jogador_correto = true;
         if (pedido_area == 2 && jogador_mesa_GPU) jogador_correto = true;
-        
-        //GERENCIAMENTO DO PROGRESSO BASEADO EM NÍVEL
-        if (jogador_correto) { 
-            switch (global.funcionario_2) {
-                case 0:
-                    timer_atendimento += clique; 
-                    break;
-                    
-                case 1:
-                    timer_atendimento += (1 / _fps) + clique; 
-                    break;
-                    
-                case 2:
-                    timer_atendimento += (1.5 / _fps) + clique; 
-                    break;
-                    
-                default:
-                    timer_atendimento += (2.5 / _fps) + clique; 
-                    break;
-            }
-        } 
 
-		//VOLTA DO PROTAGONISTA
+        //PROGRESSO DO CONSERTO
+        var multiplicador_turbo = 1;
+        if (variable_global_exists("ms_turbo_tempo") && global.ms_turbo_tempo > 0) {
+            multiplicador_turbo = 2;
+        }
+
+        if (jogador_correto) {
+            var progresso = 0;
+
+            if (global.funcionario_2 == 0) {
+                if (clique > 0) {
+                    progresso = clique;
+                }
+            } else {
+                switch (global.funcionario_2) {
+                    case 1: progresso = (1 / _fps) + clique; break;
+                    case 2: progresso = (1.5 / _fps) + clique; break;
+                    default: progresso = (2.5 / _fps) + clique; break;
+                }
+            }
+
+            timer_atendimento += progresso * multiplicador_turbo;
+        }
+
+        //VOLTA DO PROTAGONISTA
         if (timer_atendimento >= tempo_atendimento) {
             if (instance_exists(obj_psn_Principal_2)) {
                 obj_psn_Principal_2.voltando = true;
             }
         }
         break;
-		
-	//ROTAS DE SAÍDA
+
+    //ROTAS DE SAÍDA
     case 2:
         var alvo_porta_x = spawner_x + 15;
         var alvo_porta_y = spawner_y - 10;
         var linha_superior_y = spawner_y + 40;
 
-		//SE O CLIENTA VEIO DA DIREITA
+        //SE O CLIENTA VEIO DA DIREITA
         var direita = false;
         if (instance_exists(balcao_id)) {
             if (x > balcao_id.x) {
@@ -324,8 +362,8 @@ switch (estado_fila) {
                 instance_destroy();
             }
         }
-		
-		//SE O CLIENTA VEIO DA ESQUERDA
+
+        //SE O CLIENTA VEIO DA ESQUERDA
         else {
             var alvo_rota_x = alvo_porta_x;
             var alvo_rota_y = alvo_porta_y;
@@ -351,10 +389,8 @@ switch (estado_fila) {
         }
         break;
 
-	//ÁREA DE ESPERA DO LADO DIREITO 
+    //ÁREA DE ESPERA DO LADO DIREITO
     case 3:
-	
-		//CANCELA SE O BALCÃO NÃO EXISTIR MAS SE ELE EXITIR MANDA O CLIENTE ATÉ O PONTO DE ESPERA DO ATENDIMENTO
         if (!instance_exists(balcao_id)) {
             break;
         }
@@ -376,52 +412,52 @@ switch (estado_fila) {
 if (instance_exists(balcao_id)) {
     var idx_clique = ds_list_find_index(balcao_id.fila, id);
     if (idx_clique == 0 && estado_fila == 1) {
-		
-		//SÓ DEIXA CLICAR SE NÃO TIVER OUTRO PEDIDO E SÓ ABRE SE NÃO TIVER O NÍVEL 3 DOS FUNCIONÁRIOS
+
+        //SÓ DEIXA CLICAR SE NÃO TIVER OUTRO PEDIDO E SÓ ABRE SE NÃO TIVER O NÍVEL 3 DOS FUNCIONÁRIOS
         if (!instance_exists(obj_Pedido_2)) {
             if (mouse_check_button_pressed(mb_left) && position_meeting(mouse_x, mouse_y, id) && global.funcionario_2 < 3) {
                 var pedido = instance_create_depth(180, 320, -1000, obj_Pedido_2);
                 pedido.cliente_criador = id;
                 var idioma = global.idm;
 
-				//DIÁLOGO DOS CLIENTES
-				if (sprite_index == spr_psn_Programador) {
-					pedido.txt_Cliente = ["Programador",  "Programmer",  "Programador"][idioma];
-					switch (pedido_area) {
-						case 0: pedido.txt_Problema = ["Meu  SSD  não  está  sendo  reconhecido",  "My  SSD  is  not  being  recognized",  "Mi  SSD  no  está  sendo  realizado"][idioma]; break;
-						case 1: pedido.txt_Problema = ["A  fonte  queimou",  "The  power  supply  burned  out",  "La  fuente  de  alimentación  se  quemó"][idioma]; break;
-						case 2: pedido.txt_Problema = ["A  placa  de  vídeo  não  está  dando  vídeo",  "The  video  card  is  not  outputting  video",  "La  tarjeta  de  video  no  está  dando  video"][idioma]; break;
-					}
-				} else if (sprite_index == spr_psn_Mae_filho) {
-					pedido.txt_Cliente = ["Mãe  e  Filho",  "Mother  and  Son",  "Madre  e  Hijo"][idioma];
-					switch (pedido_area) {
-						case 0: pedido.txt_Problema = ["Quero  instalar  mais  joguinhos  para  ele,  mas  não  tem  mais  espaço",  "I  want  to  install  more  games  for  him,  but  there  is  no  more  space",  "Quiero  instalar  más  jueguitos  para  él,  pero  no  hay  mais  espaço"][idioma]; break;
-						case 1: pedido.txt_Problema = ["Meu  filho  mexeu  no  computador  e  agora  ele  nem  liga",  "My  son  messed  with  the  computer  and  now  it  won't  even  turn  on",  "Mi  hijo  tocó  la  computadora  y  agora  ni  siquiera  enciende"][idioma]; break;
-						case 2: pedido.txt_Problema = ["Os  jogos  do  meu  filho  estão  travando  bastante",  "My  son's  games  are  lagging  a  lot",  "Los  jogos  de  mi  hijo  se  estão  travando  mucho"][idioma]; break;
-					}
-				} else if (sprite_index == spr_psn_Idoso) {
-					pedido.txt_Cliente = ["Idoso",  "Elderly",  "Anciano"][idioma];
-					switch (pedido_area) {
-						case 0: pedido.txt_Problema = ["Aparece  dizendo  que  não  tem  espaço  mais",  "It  says  there  is  no  more  space  left",  "Dice  que  ya  no  queda  espacio"][idioma]; break;
-						case 1: pedido.txt_Problema = ["Aperto  o  botão  e  essa  caixinha  não  quer  ligar",  "I  press  the  button  and  this  little  box  won't  turn  on",  "Presiono  el  botón  y  esta  cajita  no  quiere  encender"][idioma]; break;
-						case 2: pedido.txt_Problema = ["A  tela  fica  toda  estranha  quando  uso",  "The  screen  looks  all  weird  when  I  use  it",  "La  pantalla  se  ve  muy  rara  quando  la  uso"][idioma]; break;
-					}
-				} else if (sprite_index == spr_psn_Esbanjador_2) {
-					pedido.txt_Cliente = ["Esbanjador",  "Big  Spender",  "Derrochador"][idioma];
-					switch (pedido_area) {
-						case 0: pedido.txt_Problema = ["Preciso  de  mais  espaço  para  meus  arquivos",  "I  need  more  space  for  my  files",  "Necesito  más  espacio  para  mis  archivos"][idioma]; break;
-						case 1: pedido.txt_Problema = ["Meu  computador  simplesmente  não  liga  mais",  "My  computer  simply  won't  turn  on  anymore",  "Mi  computadora  simplemente  ya  no  enciende"][idioma]; break;
-						case 2: pedido.txt_Problema = ["Os  programas  estão  com  gráficos  muito  ruins",  "The  programs  have  very  poor  graphics",  "Los  programas  tienen  gráficos  muy  malos"][idioma]; break;
-					}
-				} else if (sprite_index == spr_psn_Pao_duro_2) {
-					pedido.txt_Cliente = ["Pão-Duro",  "Cheapskate",  "Tacaño"][idioma];
-					switch (pedido_area) {
-						case 0: pedido.txt_Problema = ["Não  consigo  instalar  mais  nada  because  acabou  o  espaço",  "I  can't  install  anything  else  because  I  ran  out  of  space",  "No  puedo  instalar  nada  más  porque  se  acabó  o  espaço"][idioma]; break;
-						case 1: pedido.txt_Problema = ["Meu  computador  apagou  e  não  voltou  mais",  "My  computer  shut  off  and  never  came  back",  "Mi  computadora  se  apagó  y  no  volvió  a  encender"][idioma]; break;
-						case 2: pedido.txt_Problema = ["Os  jogos  estão  rodando  muito  mal",  "The  games  are  running  very  poorly",  "Los  jogos  se  estão  executando  muito  mal"][idioma]; break;
-					}
-				}
-				
+                //DIÁLOGO DOS CLIENTES
+                if (sprite_index == spr_psn_Programador) {
+                    pedido.txt_Cliente = ["Programador", "Programmer", "Programador"][idioma];
+                    switch (pedido_area) {
+                        case 0: pedido.txt_Problema = ["Meu  SSD  não  está  sendo  reconhecido", "My  SSD  is  not  being  recognized", "Mi  SSD  no  está  sendo  realizado"][idioma]; break;
+                        case 1: pedido.txt_Problema = ["A  fonte  queimou", "The  power  supply  burned  out", "La  fuente  de  alimentación  se  quemó"][idioma]; break;
+                        case 2: pedido.txt_Problema = ["A  placa  de  vídeo  não  está  dando  vídeo", "The  video  card  is  not  outputting  video", "La  tarjeta  de  video  no  está  dando  video"][idioma]; break;
+                    }
+                } else if (sprite_index == spr_psn_Mae_filho) {
+                    pedido.txt_Cliente = ["Mãe  e  Filho", "Mother  and  Son", "Madre  e  Hijo"][idioma];
+                    switch (pedido_area) {
+                        case 0: pedido.txt_Problema = ["Quero  instalar  mais  joguinhos  para  ele,  mas  não  tem  mais  espaço", "I  want  to  install  more  games  for  him,  but  there  is  no  more  space", "Quiero  instalar  más  jueguitos  para  él,  pero  no  hay  mais  espaço"][idioma]; break;
+                        case 1: pedido.txt_Problema = ["Meu  filho  mexeu  no  computador  e  agora  ele  nem  liga", "My  son  messed  with  the  computer  and  now  it  won't  even  turn  on", "Mi  hijo  tocó  la  computadora  y  agora  ni  siquiera  enciende"][idioma]; break;
+                        case 2: pedido.txt_Problema = ["Os  jogos  do  meu  filho  estão  travando  bastante", "My  son's  games  are  lagging  a  lot", "Los  jogos  de  mi  hijo  se  estão  travando  mucho"][idioma]; break;
+                    }
+                } else if (sprite_index == spr_psn_Idoso) {
+                    pedido.txt_Cliente = ["Idoso", "Elderly", "Anciano"][idioma];
+                    switch (pedido_area) {
+                        case 0: pedido.txt_Problema = ["Aparece  dizendo  que  não  tem  espaço  mais", "It  says  there  is  no  more  space  left", "Dice  que  ya  no  queda  espacio"][idioma]; break;
+                        case 1: pedido.txt_Problema = ["Aperto  o  botão  e  essa  caixinha  não  quer  ligar", "I  press  the  button  and  this  little  box  won't  turn  on", "Presiono  el  botón  y  esta  cajita  no  quiere  encender"][idioma]; break;
+                        case 2: pedido.txt_Problema = ["A  tela  fica  toda  estranha  quando  uso", "The  screen  looks  all  weird  when  I  use  it", "La  pantalla  se  ve  muy  rara  quando  la  uso"][idioma]; break;
+                    }
+                } else if (sprite_index == spr_psn_Esbanjador_2) {
+                    pedido.txt_Cliente = ["Esbanjador", "Big  Spender", "Derrochador"][idioma];
+                    switch (pedido_area) {
+                        case 0: pedido.txt_Problema = ["Preciso  de  mais  espaço  para  meus  arquivos", "I  need  more  space  for  my  files", "Necesito  más  espacio  para  mis  archivos"][idioma]; break;
+                        case 1: pedido.txt_Problema = ["Meu  computador  simplesmente  não  liga  mais", "My  computer  simply  won't  turn  on  anymore", "Mi  computadora  simplemente  ya  no  enciende"][idioma]; break;
+                        case 2: pedido.txt_Problema = ["Os  programas  estão  com  gráficos  muito  ruins", "The  programs  have  very  poor  graphics", "Los  programas  tienen  gráficos  muy  malos"][idioma]; break;
+                    }
+                } else if (sprite_index == spr_psn_Pao_duro_2) {
+                    pedido.txt_Cliente = ["Pão-Duro", "Cheapskate", "Tacaño"][idioma];
+                    switch (pedido_area) {
+                        case 0: pedido.txt_Problema = ["Não  consigo  instalar  mais  nada  porque  acabou  o  espaço", "I  can't  install  anything  else  because  I  ran  out  of  space", "No  puedo  instalar  nada  más  porque  se  acabó  o  espaço"][idioma]; break;
+                        case 1: pedido.txt_Problema = ["Meu  computador  apagou  e  não  voltou  mais", "My  computer  shut  off  and  never  came  back", "Mi  computadora  se  apagó  y  no  volvió  a  encender"][idioma]; break;
+                        case 2: pedido.txt_Problema = ["Os  jogos  estão  rodando  muito  mal", "The  games  are  running  very  poorly", "Los  jogos  se  estão  executando  muito  mal"][idioma]; break;
+                    }
+                }
+
                 //EVITAR BUG DE DUPLICAÇÃO
                 mouse_clear(mb_left);
             }
@@ -434,13 +470,13 @@ var andando = (x != x_anterior || y != y_anterior);
 if (andando) {
     var _dx = x - x_anterior;
     var _dy = y - y_anterior;
-    var _frame_min = 0;
-    var _frame_max = 7;
-    
+    var _frame_min = 8;
+    var _frame_max = 15;
+
     if (abs(_dx) > abs(_dy)) {
-        _frame_min = 18;
-        _frame_max = 25;
-        
+        _frame_min = 16;
+        _frame_max = 23;
+
         if (_dx > 0) {
             image_xscale = -abs(image_xscale);
         } else {
@@ -448,26 +484,26 @@ if (andando) {
         }
     } else {
         image_xscale = abs(image_xscale);
-        
+
         if (_dy > 0) {
             _frame_min = 8;
-            _frame_max = 17;
+            _frame_max = 15;
         } else {
-            _frame_min = 26;
-            _frame_max = 33;
+            _frame_min = 24;
+            _frame_max = 31;
         }
-    }  
+    }
     image_speed = 0;
-    image_index += 35 / _fps;
-    
+    image_index += 25 / _fps;
+
     if (image_index < _frame_min || image_index > _frame_max) {
         image_index = _frame_min;
     }
 } else {
     image_xscale = abs(image_xscale);
     image_speed = 0;
-    image_index += 35 / _fps;
-    
+    image_index += 5 / _fps;
+
     if (image_index < 0 || image_index > 7) {
         image_index = 0;
     }

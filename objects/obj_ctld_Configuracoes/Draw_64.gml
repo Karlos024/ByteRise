@@ -1,9 +1,9 @@
 if (exibir_config == true) {
     //BOTÃO TELA PRINCIPAL
-    draw_sprite_ext(spr_btn_Tela_principal_fora_1, 0, 61, 608, 1.9, 0.9, 0, c_white, 1);
+    draw_sprite_ext(spr_btn_Tela_principal_fora, 0, 61, 608, 1.9, 0.9, 0, c_white, 1);
     
     //BOTÃO APRIMORAMENTOS
-    draw_sprite_ext(spr_btn_Tela_aprimoramentos_fora_1, 0, 182, 608, 1.9, 0.9, 0, c_white, 1);
+    draw_sprite_ext(spr_btn_Tela_aprimoramentos_fora, 0, 182, 608, 1.9, 0.9, 0, c_white, 1);
 
     //FUNDO CONFIGURAÇÕES
 	draw_sprite_ext(spr_Tela_configuracoes_fundo, global.idm, 0, 0, 5.63, 9, 0, c_white, 1);

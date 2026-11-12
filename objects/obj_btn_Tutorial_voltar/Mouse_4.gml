@@ -1,2 +1,3 @@
-image_xscale = 0.9;
-image_yscale = 0.9;
+if (!tutorial_permite(object_index)) exit;
+image_xscale = 1.4;
+image_yscale = 1.8;

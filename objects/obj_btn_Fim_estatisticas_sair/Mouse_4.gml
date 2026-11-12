@@ -1,3 +1,4 @@
+if (!tutorial_permite(object_index)) exit;
 image_xscale = 0.9;
 image_yscale = 0.9;
 

@@ -10,14 +10,7 @@ if (exibir_confirmacao == true) {
             if (Som_ativo) {
                 audio_play_sound(snd_Compra, 1, false);
             }
-            if (audio_is_playing(snd_Musica)) {
-                audio_stop_sound(snd_Musica);
-            }
-            
-            //ATIVA A MÚSICA FINAL
-            if (global.ms_ligada == true) {
-                audio_play_sound(snd_Fim, 10, true);
-            }
+
             instance_destroy();
             room_goto(rm_Cutscene_final);
         }

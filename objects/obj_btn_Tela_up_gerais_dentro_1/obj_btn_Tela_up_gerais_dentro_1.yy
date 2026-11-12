@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_btn_Tela_up_gerais_dentro_1",
-    "path":"sprites/spr_btn_Tela_up_gerais_dentro_1/spr_btn_Tela_up_gerais_dentro_1.yy",
+    "name":"spr_btn_Tela_up_gerais_dentro",
+    "path":"sprites/spr_btn_Tela_up_gerais_dentro/spr_btn_Tela_up_gerais_dentro.yy",
   },
   "spriteMaskId":null,
   "visible":true,

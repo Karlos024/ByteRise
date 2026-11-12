@@ -139,18 +139,41 @@ if ((estado_fila == 3 || estado_fila == 4) && !instance_exists(fliperama_alvo)) 
 var _fps = game_get_speed(gamespeed_fps);
 if (!variable_global_exists("tempo")) { global.tempo = 1.0; }
 
-//CLIQUE
+
+//CLIQUE E MISSÃO SUPER CLIQUE
 var clique = 0;
+
 if (mouse_check_button_pressed(mb_left)) {
+
     if (mouse_y >= 64 && mouse_y <= 576) {
+
         var ignora = false;
+
         if (instance_exists(obj_ctld_Configuracoes)) {
-            if (obj_ctld_Configuracoes.exibir_config) { ignora = true; }
+            if (obj_ctld_Configuracoes.exibir_config) {
+                ignora = true;
+            }
         }
+
         if (instance_exists(obj_ctld_Troca)) {
-            if (obj_ctld_Troca.exibir_troca_fase) { ignora = true; }
+            if (obj_ctld_Troca.exibir_troca_fase) {
+                ignora = true;
+            }
         }
-        if (!ignora) { clique = global.tempo; }
+
+        //CONTA SOMENTE DURANTE O ATENDIMENTO
+        if (!ignora && (estado_fila == 1 || estado_fila == 4)) {
+
+            clique = global.tempo;
+
+            //BÔNUS TEMPORÁRIO
+            if (global.ms_superclique_tempo > 0) {
+                clique += global.ms_superclique_bonus;
+            }
+
+            //REGISTRA A MISSÃO
+            scp_ms_superclique();
+        }
     }
 }
 
@@ -287,11 +310,11 @@ switch (estado_fila) {
 
             //LADO DO FLIPERAMA ONDE O CLIENTE FICA
             if (fliperama_livre.image_xscale > 0) {
-                dentro_x = fliperama_livre.x + 28;
+                dentro_x = fliperama_livre.x + 35;
             } else {
-                dentro_x = fliperama_livre.x - 28;
+                dentro_x = fliperama_livre.x - 35;
             }
-            dentro_y = fliperama_livre.y + 12;
+            dentro_y = fliperama_livre.y;
 
             //CORREDOR DO LADO DO CLIENTE
 			var corredor_alvo_cliente_x = corredor_esquerdo_x;
@@ -359,15 +382,18 @@ switch (estado_fila) {
     //CÁLCULO DO VALOR DO CLIQUE
 	var progresso_clique = 0;
 	if (clique > 0) {
-		progresso_clique = 0.05;
+		progresso_clique = 0.15;
+		if (global.ms_superclique_tempo > 0) {
+			progresso_clique += 0.50;
 		}
+	}
 
         //CÁLCULO DA INTERNET
         var velocidade_auto = 0;
         if (variable_global_exists("internet")) {
-            if (global.internet == 1) { velocidade_auto = 1 / 10; }
-            else if (global.internet == 2) { velocidade_auto = 1 / 7; }
-            else if (global.internet == 3) { velocidade_auto = 1 / 5; }
+            if (global.internet == 1) { velocidade_auto = 1 / 7; }
+            else if (global.internet == 2) { velocidade_auto = 1 / 5; }
+            else if (global.internet == 3) { velocidade_auto = 1 / 3; }
         }
         progresso_dentro += (velocidade_auto / _fps) + progresso_clique;
 
@@ -385,10 +411,22 @@ switch (estado_fila) {
             var moedas_base = 0;
             var xp_base = 0;
 
+            //EVENTO DA MISSÃO - FLIPERAMA TURBO
+            var turbo_ativo = variable_global_exists("ms_fliperama_tempo") && global.ms_fliperama_tempo > 0;
+            var nivel_cube = global.fliperama_1;
+            var nivel_alfredos = global.fliperama_2;
+            var nivel_pocket = global.fliperama_3;
+
+            if (turbo_ativo) {
+                nivel_cube = 15;
+                nivel_alfredos = 15;
+                nivel_pocket = 15;
+            }
+
       switch (tipo_fliperama) {
                 case 0:
                     moedas_base = 600; xp_base = 50;
-                    switch (global.fliperama_1) {
+                    switch (nivel_cube) {
                         case 1: moedas_base = 600; xp_base = 50; break;
                         case 2: moedas_base = 600; xp_base = 70; break;
                         case 3: moedas_base = 600; xp_base = 70; break;
@@ -411,7 +449,7 @@ switch (estado_fila) {
 
                 case 1:
                     moedas_base = 1600; xp_base = 120;
-                    switch (global.fliperama_2) {
+                    switch (nivel_alfredos) {
                         case 1: moedas_base = 1600; xp_base = 120; break;
                         case 2: moedas_base = 1600; xp_base = 150; break;
                         case 3: moedas_base = 1600; xp_base = 150; break;
@@ -434,7 +472,7 @@ switch (estado_fila) {
 
                 case 2:
                     moedas_base = 3000; xp_base = 220;
-                    switch (global.fliperama_3) {
+                    switch (nivel_pocket) {
                         case 1: moedas_base = 3000; xp_base = 220; break;
                         case 2: moedas_base = 3000; xp_base = 260; break;
                         case 3: moedas_base = 3000; xp_base = 260; break;
@@ -457,16 +495,51 @@ switch (estado_fila) {
             }
 
            	//ADICIONA NA CONTA E COM O MULTIPLICADOR
-			var recompensa_final = floor(valor_moedas * multiplicador_pagamento);
+			var multiplicador_moedas_evento = 1;
+			var multiplicador_xp_evento = 1;
+			if (variable_global_exists("ms_taxacao_tempo") && global.ms_taxacao_tempo > 0) multiplicador_moedas_evento = 3;
+			if (variable_global_exists("ms_chuva_tempo") && global.ms_chuva_tempo > 0) multiplicador_xp_evento = 3;
+
+			//EVENTO DA MISSÃO - FREGUESIA VIP
+			var multiplicador_cliente = multiplicador_pagamento;
+			if (variable_global_exists("ms_vip_tempo") && global.ms_vip_tempo > 0) {
+				multiplicador_cliente = 2.0;
+			}
+
+			//RECOMPENSA FINAL
+			var recompensa_final = floor(
+			valor_moedas *
+			multiplicador_cliente *
+			multiplicador_moedas_evento
+			);
+			var xp_final = floor(valor_xp * multiplicador_xp_evento);
 			global.moedas += recompensa_final;
 			global.moedas_acumuladas += recompensa_final;
-			global.experiencia_atual += valor_xp;
+			global.experiencia_atual += xp_final;
+			if (!variable_global_exists("xp_acumulado")) global.xp_acumulado = 0;
+			if (!variable_global_exists("ms_progressos")) global.ms_progressos = array_create(12, 0);
+			global.xp_acumulado += xp_final;
+			global.ms_progressos[0] = global.xp_acumulado;
+			global.ms_progressos[2] = global.moedas_acumuladas;
+
+			//EVENTO DE MISSÃO - CASA LOTADA
+			if (!variable_global_exists("ms_casa_atendimentos")) {
+			global.ms_casa_atendimentos = 0;
+			}
+			global.ms_casa_atendimentos += 1;
+			global.ms_progressos[3] = global.ms_casa_atendimentos;
+
+			//EVENTO DE MISSÃO - FREGUESIA VIP
+			if (!variable_global_exists("ms_vip_atendimentos")) {
+			global.ms_vip_atendimentos = 0;
+			}
+			global.ms_vip_atendimentos += 1;
+			global.ms_progressos[5] = global.ms_vip_atendimentos;
 			
 			//SOM DE PAGAMENTO
             if (variable_global_exists("sc_ligado") && global.sc_ligado && asset_get_index("snd_Moeda") != -1) {
                 audio_play_sound(snd_Moeda, 1, false);
             }
-
             fase_saida = 0;
             estado_fila = 5;
         }
@@ -506,6 +579,7 @@ switch (estado_fila) {
 
 //ANIMAÇÃO
 var andando = (x != x_anterior || y != y_anterior);
+
 if (andando) {
     var _dx = x - x_anterior;
     var _dy = y - y_anterior;
@@ -513,32 +587,35 @@ if (andando) {
     var _frame_max = 7;
     
     if (abs(_dx) > abs(_dy)) {
-        _frame_min = 18;
-        _frame_max = 25;
+        _frame_min = 16;
+        _frame_max = 23;
         
         if (_dx > 0) {
             image_xscale = -abs(image_xscale);
         } else {
             image_xscale = abs(image_xscale);
         }
-    } else {
+    } 
+    else {
         image_xscale = abs(image_xscale);
         
         if (_dy > 0) {
             _frame_min = 8;
-            _frame_max = 17;
+            _frame_max = 15;
         } else {
-            _frame_min = 26;
-            _frame_max = 33;
+            _frame_min = 24;
+            _frame_max = 31;
         }
     }
+    
     image_speed = 0;
-    image_index += 35 / _fps;
+    image_index += 25 / _fps;
     
     if (image_index < _frame_min || image_index > _frame_max) {
         image_index = _frame_min;
     }
-} else if (estado_fila == 4) {
+} 
+else if (estado_fila == 4) {
     if (instance_exists(fliperama_alvo)) {
         if (fliperama_alvo.image_xscale > 0) {
             image_xscale = abs(image_xscale);
@@ -548,15 +625,16 @@ if (andando) {
     }
     
     image_speed = 0;
-    image_index += 35 / _fps;
+    image_index += 20 / _fps;
     
-    if (image_index < 34 || image_index > 41) {
-        image_index = 34;
+    if (image_index < 32 || image_index > 39) {
+        image_index = 32;
     }
-} else {
+}
+else {
     image_xscale = abs(image_xscale);
     image_speed = 0;
-    image_index += 35 / _fps;
+    image_index += 5 / _fps;
     
     if (image_index < 0 || image_index > 7) {
         image_index = 0;

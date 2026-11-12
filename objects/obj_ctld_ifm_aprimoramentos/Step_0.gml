@@ -15,7 +15,8 @@ if (!variable_global_exists("es")) { global.es = true; }
 	if (mouse_check_button_pressed(mb_left)) {
        var inst_Botao = instance_position(mouse_x, mouse_y, obj_btn_Informacao);
     
-    if (inst_Botao != noone) {   
+    if (inst_Botao != noone) {
+		
         //1 CASO CLICA NO BOTÃO É PRA FECHAR
         if (Botao == inst_Botao) {
             if (instance_exists(Painel)) { instance_destroy(Painel); }

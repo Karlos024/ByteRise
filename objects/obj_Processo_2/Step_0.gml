@@ -18,7 +18,7 @@ if (room_get_name(room) != "rm_Tela_principal_2") {
     
     //REINICIA O TIMER SE O REPARO AUTOMÁTICO CHEGUE AO FIM
     if (automacao_total) {
-        var tempo_total_processo = 5; 
+        var tempo_total_processo = 4; 
         if (timer_conserto_background >= tempo_total_processo) {
             timer_conserto_background = 0; 
             

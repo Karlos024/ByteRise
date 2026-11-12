@@ -1,3 +1,4 @@
+global.moedas_final = global.moedas_acumuladas;
 audio_sound_gain(snd_Troca_de_tela, 1, 0);
 
 //GARANTE QUE O OBJETO ESTATÍSTICAS NÃO DUPLIQUE

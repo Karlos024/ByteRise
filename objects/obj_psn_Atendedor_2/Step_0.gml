@@ -1,3 +1,4 @@
+if (tutorial_f2_ativo()) { visible = false; exit; }
 if (variable_global_exists("funcionario_2") && global.funcionario_2 >= 3) {
     visible = true;
 } else {

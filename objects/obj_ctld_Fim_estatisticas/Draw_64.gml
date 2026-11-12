@@ -27,7 +27,7 @@ if (exibir_estatisticas == true) {
 	var char_Cliques = string(global.total_cliques);
     var Conta_cliques = string_length(char_Cliques);
     var txt_Cliques_Final = "";
-	var char_Acumuladas = string(floor(global.moedas_acumuladas));
+	var char_Acumuladas = string(floor(global.moedas_final));
 	var Conta = string_length(char_Acumuladas);
 	var txt_Final = "";
 	var txt_Favorita = "";
@@ -137,10 +137,10 @@ if (exibir_estatisticas == true) {
 	draw_set_font(font_Titulo_pequena);
 	draw_text(180, 345, txt_Final);
 	
-	if (global.moedas_acumuladas < 18000000) {
+	if (global.moedas_final < 18000000) {
 	txt_1 =  ["Saldo  fantasma:  O  balancete  fechou  com  uma  conta  tão  magra  que  as  moedas  viraram  lenda  urbana!", "Ghost  balance:  The  ledger  closed  with  a  bank  account  so  thin  that  the  coins  became  an  urban  legend!", "Saldo  fantasma:  ¡El  balance  cerró  con  una  cuenta  tan  flaca  que  las  monedas  se  volvieron  leyenda  urbana!"];
 	txt_Texto = txt_1[global.idm];
-	} else if (global.moedas_acumuladas >= 18000000 && global.moedas_acumuladas <= 25000000) {
+	} else if (global.moedas_final >= 18000000 && global.moedas_final <= 25000000) {
 	txt_2 =["Gordura  financeira:  O  saldo  bancário  já  consegue  bancar  uma  memória  RAM  com  LED.", "Financial  cushion:  The  bank  balance  can  already  afford  a  RAM  with  LED.", "Colchón  financiero:  El  saldo  bancario  ya  puede  pagar  una  memoria  RAM  con  LED."];
 	txt_Texto = txt_2[global.idm];
 	} else {

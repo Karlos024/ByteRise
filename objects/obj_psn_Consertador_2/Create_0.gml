@@ -9,7 +9,7 @@ if (!variable_instance_exists(id, "mesa_alvo")) { mesa_alvo = noone; }
 velocidade = 3;
 distancia_chegada = 4;
 x_posto = 224;  
-y_posto = 384; 
+y_posto = 360; 
 tempo_trabalho = 5;
 if (estado_func == 0) {
     x = x_posto;
