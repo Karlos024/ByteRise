@@ -1,0 +1,2 @@
+Painel = noone;
+Botao  = noone;

@@ -1,0 +1,2 @@
+// A CARGA JA TERMINOU NO CREATE; PREPARA A INTERFACE ANTES DO PRIMEIRO DRAW.
+progresso_garantir_controladores();
