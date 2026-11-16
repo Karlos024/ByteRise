@@ -1,4 +1,4 @@
-<>//FUNDO COLORIDO, MOEDA E SINAL COM AS CORES ORIGINAIS
+//FUNDO COLORIDO, MOEDA E SINAL COM AS CORES ORIGINAIS
 if (image_blend != c_white) {
     shader_set(shd_Fundo_compra);
     shader_set_uniform_f(shader_get_uniform(shd_Fundo_compra, "cor_fundo"),
