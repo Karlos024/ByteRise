@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shd_Fundo_compra",
+  "name":"shd_Fundo_compra",
+  "parent":{
+    "name":"Aprimoramento",
+    "path":"folders/Objeto/Aprimoramento.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}
